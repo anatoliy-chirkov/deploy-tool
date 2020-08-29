@@ -1,0 +1,13 @@
+{
+    "name": "PHP",
+    "version": "7.3 fpm buster",
+    "description": "",
+    "image": "./image",
+    "env": null,
+    "config": {
+        "default": "./www.conf",
+        "path": "/usr/local/etc/php-fpm.d/www.conf"
+    },
+    "cachedir": null,
+    "workdir": "/var/www"
+}

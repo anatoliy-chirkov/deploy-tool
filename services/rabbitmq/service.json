@@ -1,0 +1,21 @@
+{
+    "name": "RabbitMQ",
+    "version": "bitnami latest",
+    "description": "",
+    "image": "bitnami/rabbitmq:latest",
+    "env": [
+        {
+            "var": "RABBITMQ_USERNAME",
+            "name": "User",
+            "description": null
+        },
+        {
+            "var": "RABBITMQ_PASSWORD",
+            "name": "Password",
+            "description": null
+        }
+    ],
+    "config": null,
+    "cachedir": "/bitnami",
+    "workdir": "/var/www"
+}

@@ -1,0 +1,62 @@
+version: '3.3'
+networks:
+  general:
+    driver: bridge
+services:
+  deploy_tool_nginx:
+    container_name: deploy_tool_nginx
+    build: ./build/nginx
+    volumes:
+      - ./build/nginx/config:/etc/nginx/conf.d/
+      - ./build/nginx/projects:/etc/nginx/conf.d/projects
+      - ./:/var/www
+    ports:
+      - ${API_PORT}:756
+      - ${FRONTEND_PORT}:755
+      - 80:80
+      - 443:443
+    restart: always
+    tty: true
+    networks:
+      - general
+  deploy_tool_php:
+    container_name: deploy_tool_php
+    build: ./build/php-fpm
+    volumes:
+      - ./build/php-fpm/config/www.conf:/usr/local/etc/php-fpm.d/www.conf
+      - ./:/var/www
+      - /usr/bin:/usr/bin
+      - ../script.sh:/var/www/script.sh
+    restart: always
+    tty: true
+    networks:
+      - general
+  # deploy_tool_docker:
+  #   container_name: deploy_tool_docker
+  #   build: ./build/docker
+  #   ports:
+  #     - ${API_PORT}:756
+  #     - ${FRONTEND_PORT}:755
+  #     - 80:80
+  #     - 443:443
+  #   volumes:
+  #     - ./:/var/www
+  #     - ./build/nginx/config:/etc/nginx/conf.d/
+  #     - /var/run/docker.sock:/var/run/docker.sock
+  #     - /var/lib/docker:/var/lib/docker
+  #   tty: true
+  #   networks:
+  #     - general
+  deploy_tool_mysql:
+    container_name: deploy_tool_mysql
+    image: mysql:latest
+    volumes:
+      - ./build/mysql/config/docker.cnf:/etc/mysql/conf.d/docker.cnf
+      - ./storage/mysql:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_DATABASE: ${COMPOSE_PROJECT_NAME}
+    restart: always
+    tty: true
+    networks:
+      - general

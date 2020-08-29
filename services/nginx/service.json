@@ -1,0 +1,13 @@
+{
+    "name": "Nginx",
+    "version": "1.17",
+    "description": "",
+    "image": "./image",
+    "env": null,
+    "config": {
+        "default": "./nginx.conf",
+        "path": "/etc/nginx/conf.d/"
+    },
+    "cachedir": null,
+    "workdir": "/var/www"
+}

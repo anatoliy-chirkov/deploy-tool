@@ -1,0 +1,24 @@
+{
+    "name": "MySQL",
+    "version": "latest",
+    "description": "",
+    "image": "mysql:latest",
+    "env": [
+        {
+            "var": "MYSQL_ROOT_PASSWORD",
+            "name": "Password for root user",
+            "description": null
+        },
+        {
+            "var": "MYSQL_DATABASE",
+            "name": "Database",
+            "description": null
+        }
+    ],
+    "config": {
+        "default": "./docker.cnf",
+        "path": "/etc/mysql/conf.d/docker.cnf"
+    },
+    "cachedir": "/var/lib/mysql",
+    "workdir": null
+}
